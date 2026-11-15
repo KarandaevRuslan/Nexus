@@ -1,0 +1,124 @@
+@media(max-width:1130px) {
+  .main-grid {
+  grid-template-columns:minmax(0,1fr)
+}
+
+.side-column {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:start
+}
+
+.table-panel {
+  min-height:auto
+}
+
+.log-panel {
+  max-height:620px
+}
+
+
+}
+
+
+@media(max-width:730px) {
+  .app-shell {
+  padding:0 15px
+}
+
+.site-header {
+  min-height:82px
+}
+
+.version-tag {
+  display:none
+}
+
+.hero {
+  margin:32px 0 27px;
+  align-items:flex-start;
+  flex-direction:column;
+  gap:18px
+}
+
+h1 {
+  font-size:39px
+}
+
+.metrics-row {
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px
+}
+
+.metric {
+  min-height:110px;
+  padding:16px
+}
+
+.metric strong {
+  font-size:32px
+}
+
+.main-grid {
+  gap:13px
+}
+
+.main-column,.side-column {
+  gap:13px
+}
+
+.side-column {
+  display:flex;
+  flex-direction:column
+}
+
+.side-column>* {
+  width:100%
+}
+
+.table-panel,.people-panel,.controls-panel,.log-panel {
+  padding:19px 16px
+}
+
+.table-panel {
+  overflow:hidden
+}
+
+.table-svg {
+  margin:0 -6%;
+  width:112%
+}
+
+.philosopher-row {
+  gap:8px
+}
+
+.phase-pill {
+  padding:6px;
+  font-size:9px
+}
+
+.person-avatar {
+  width:35px;
+  height:35px
+}
+
+footer {
+  flex-direction:column;
+  text-align:center;
+  line-height:1.6
+}
+
+
+}
+
+
+@media(prefers-reduced-motion:reduce) {
+  .eating-beacon {
+  animation:none
+}
+
+
+}
+
+

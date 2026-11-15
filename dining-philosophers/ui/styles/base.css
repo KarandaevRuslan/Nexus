@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family:'DM Sans',system-ui,-apple-system,Segoe UI,sans-serif;
+  color:#edf4ef;
+  background:#101819;
+  font-synthesis:none;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased
+}
+
+
+* {
+  box-sizing:border-box
+}
+
+body {
+  margin:0;
+  min-width:320px;
+  background:radial-gradient(ellipse at 16% -10%,#203532 0,transparent 38%),#101819
+}
+
+button,input,select {
+  font:inherit
+}
+
+button {
+  cursor:pointer
+}
+
+button:disabled {
+  opacity:.35;
+  cursor:not-allowed
+}
+
+button:focus-visible,input:focus-visible,select:focus-visible {
+  outline:2px solid #ecc27a;
+  outline-offset:3px
+}
+
+
+.app-shell {
+  max-width:1510px;
+  margin:0 auto;
+  padding:0 30px
+}
+
+.site-header {
+  min-height:96px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #2c3b39;
+  gap:20px
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:14px
+}
+
+.brand-symbol {
+  height:51px;
+  width:51px;
+  border-radius:15px;
+  background:#e9bd76;
+  color:#182421;
+  display:grid;
+  place-items:center;
+  font-size:32px;
+  font-weight:800;
+  box-shadow:0 0 35px #d1a56c18
+}
+
+.brand-title {
+  font-family:'Space Grotesk',sans-serif;
+  display:block;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.1em;
+  line-height:1
+}
+
+.brand-title em {
+  color:#e5bd80;
+  font-style:normal
+}
+
+.brand-subtitle {
+  display:block;
+  color:#77908c;
+  font-size:10px;
+  letter-spacing:.14em;
+  margin-top:8px;
+  font-weight:700
+}
+
+.version-tag {
+  color:#9baea9;
+  border:1px solid #384945;
+  background:#152321;
+  padding:9px 15px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.09em
+}
+
+.version-bullet {
+  color:#80d3ab;
+  margin:0 5px
+}
+
+.hero {
+  display:flex;
+  justify-content:space-between;
+  gap:32px;
+  align-items:center;
+  margin:48px 0 38px
+}
+
+.eyebrow {
+  color:#cfab71;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.18em;
+  margin:0 0 11px
+}
+
+h1,h2,p {
+  margin-top:0
+}
+
+h1,h2 {
+  font-family:'Space Grotesk',sans-serif
+}
+
+h1 {
+  font-size:clamp(36px,4vw,59px);
+  letter-spacing:-.055em;
+  line-height:1.1;
+  margin:0 0 19px;
+  font-weight:700
+}
+
+h1 em {
+  color:#e5bd80;
+  font-style:normal
+}
+
+.hero-description {
+  max-width:665px;
+  color:#99b0aa;
+  font-size:15px;
+  line-height:1.75;
+  margin:0
+}
+
+.status-display {
+  display:flex;
+  align-items:center;
+  gap:13px;
+  background:#1e2b29;
+  color:#d4dfd8;
+  border:1px solid #35453f;
+  padding:15px 20px;
+  border-radius:16px;
+  font-weight:700;
+  white-space:nowrap;
+  letter-spacing:.01em
+}
+
+.status-led {
+  height:11px;
+  width:11px;
+  border-radius:100%;
+  background:#738078;
+  box-shadow:0 0 0 5px #737d781c
+}
+
+.status-display.running .status-led {
+  background:#80d4ad;
+  box-shadow:0 0 0 5px #6bb99a24,0 0 18px #80d4ad
+}
+
+.status-display.paused .status-led {
+  background:#efbf75;
+  box-shadow:0 0 0 5px #efbf7524
+}
+
+.metrics-row {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:17px;
+  margin-bottom:22px
+}
+
+.metric {
+  min-height:129px;
+  padding:20px 24px;
+  border:1px solid #31413d;
+  border-radius:18px;
+  background:linear-gradient(135deg,#202e2c,#182321);
+  display:flex;
+  flex-direction:column
+}
+
+.metric>span {
+  font-size:10px;
+  letter-spacing:.1em;
+  color:#90a9a3;
+  font-weight:800
+}
+
+.metric strong {
+  display:block;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:41px;
+  line-height:1.27;
+  color:#f1eadc;
+  letter-spacing:-.06em;
+  margin-top:5px
+}
+
+.metric strong b {
+  font-size:19px;
+  color:#798f86;
+  font-weight:500
+}
+
+.metric small {
+  font-size:11px;
+  color:#7d958f;
+  margin-top:3px
+}
+
+.main-grid {
+  display:grid;
+  grid-template-columns:minmax(0,1.63fr) minmax(350px,.91fr);
+  gap:20px
+}
+
+.main-column,.side-column {
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:20px
+}

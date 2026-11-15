@@ -1,0 +1,719 @@
+{
+  "kind": "TranslationUnit",
+  "span": {
+    "start": {
+      "offset": 59,
+      "line": 2,
+      "column": 1
+    },
+    "end": {
+      "offset": 305,
+      "line": 13,
+      "column": 1
+    }
+  },
+  "declarations": [
+    {
+      "kind": "FunctionDeclaration",
+      "span": {
+        "start": {
+          "offset": 59,
+          "line": 2,
+          "column": 1
+        },
+        "end": {
+          "offset": 89,
+          "line": 2,
+          "column": 31
+        }
+      },
+      "returnType": {
+        "name": "int",
+        "pointerDepth": 0
+      },
+      "name": "sum",
+      "parameters": [
+        {
+          "kind": "Parameter",
+          "span": {
+            "start": {
+              "offset": 67,
+              "line": 2,
+              "column": 9
+            },
+            "end": {
+              "offset": 76,
+              "line": 2,
+              "column": 18
+            }
+          },
+          "type": {
+            "name": "int",
+            "pointerDepth": 1
+          },
+          "name": "data",
+          "arraySizes": []
+        },
+        {
+          "kind": "Parameter",
+          "span": {
+            "start": {
+              "offset": 78,
+              "line": 2,
+              "column": 20
+            },
+            "end": {
+              "offset": 87,
+              "line": 2,
+              "column": 29
+            }
+          },
+          "type": {
+            "name": "int",
+            "pointerDepth": 0
+          },
+          "name": "count",
+          "arraySizes": []
+        }
+      ],
+      "body": null
+    },
+    {
+      "kind": "VariableDeclaration",
+      "span": {
+        "start": {
+          "offset": 90,
+          "line": 3,
+          "column": 1
+        },
+        "end": {
+          "offset": 106,
+          "line": 3,
+          "column": 17
+        }
+      },
+      "type": {
+        "name": "int",
+        "pointerDepth": 0
+      },
+      "declarators": [
+        {
+          "kind": "VariableDeclarator",
+          "span": {
+            "start": {
+              "offset": 94,
+              "line": 3,
+              "column": 5
+            },
+            "end": {
+              "offset": 105,
+              "line": 3,
+              "column": 16
+            }
+          },
+          "name": "counter",
+          "pointerDepth": 0,
+          "arraySizes": [],
+          "initializer": {
+            "kind": "Literal",
+            "span": {
+              "start": {
+                "offset": 104,
+                "line": 3,
+                "column": 15
+              },
+              "end": {
+                "offset": 105,
+                "line": 3,
+                "column": 16
+              }
+            },
+            "literalType": "number",
+            "raw": "0"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "VariableDeclaration",
+      "span": {
+        "start": {
+          "offset": 107,
+          "line": 4,
+          "column": 1
+        },
+        "end": {
+          "offset": 122,
+          "line": 4,
+          "column": 16
+        }
+      },
+      "type": {
+        "name": "int",
+        "pointerDepth": 0
+      },
+      "declarators": [
+        {
+          "kind": "VariableDeclarator",
+          "span": {
+            "start": {
+              "offset": 111,
+              "line": 4,
+              "column": 5
+            },
+            "end": {
+              "offset": 121,
+              "line": 4,
+              "column": 15
+            }
+          },
+          "name": "samples",
+          "pointerDepth": 0,
+          "arraySizes": [
+            {
+              "kind": "Literal",
+              "span": {
+                "start": {
+                  "offset": 119,
+                  "line": 4,
+                  "column": 13
+                },
+                "end": {
+                  "offset": 120,
+                  "line": 4,
+                  "column": 14
+                }
+              },
+              "literalType": "number",
+              "raw": "3"
+            }
+          ],
+          "initializer": null
+        }
+      ]
+    },
+    {
+      "kind": "FunctionDeclaration",
+      "span": {
+        "start": {
+          "offset": 123,
+          "line": 5,
+          "column": 1
+        },
+        "end": {
+          "offset": 304,
+          "line": 12,
+          "column": 2
+        }
+      },
+      "returnType": {
+        "name": "int",
+        "pointerDepth": 0
+      },
+      "name": "sum",
+      "parameters": [
+        {
+          "kind": "Parameter",
+          "span": {
+            "start": {
+              "offset": 131,
+              "line": 5,
+              "column": 9
+            },
+            "end": {
+              "offset": 140,
+              "line": 5,
+              "column": 18
+            }
+          },
+          "type": {
+            "name": "int",
+            "pointerDepth": 1
+          },
+          "name": "data",
+          "arraySizes": []
+        },
+        {
+          "kind": "Parameter",
+          "span": {
+            "start": {
+              "offset": 142,
+              "line": 5,
+              "column": 20
+            },
+            "end": {
+              "offset": 151,
+              "line": 5,
+              "column": 29
+            }
+          },
+          "type": {
+            "name": "int",
+            "pointerDepth": 0
+          },
+          "name": "count",
+          "arraySizes": []
+        }
+      ],
+      "body": {
+        "kind": "BlockStatement",
+        "span": {
+          "start": {
+            "offset": 153,
+            "line": 5,
+            "column": 31
+          },
+          "end": {
+            "offset": 304,
+            "line": 12,
+            "column": 2
+          }
+        },
+        "statements": [
+          {
+            "kind": "VariableDeclaration",
+            "span": {
+              "start": {
+                "offset": 159,
+                "line": 6,
+                "column": 5
+              },
+              "end": {
+                "offset": 181,
+                "line": 6,
+                "column": 27
+              }
+            },
+            "type": {
+              "name": "int",
+              "pointerDepth": 0
+            },
+            "declarators": [
+              {
+                "kind": "VariableDeclarator",
+                "span": {
+                  "start": {
+                    "offset": 163,
+                    "line": 6,
+                    "column": 9
+                  },
+                  "end": {
+                    "offset": 168,
+                    "line": 6,
+                    "column": 14
+                  }
+                },
+                "name": "i",
+                "pointerDepth": 0,
+                "arraySizes": [],
+                "initializer": {
+                  "kind": "Literal",
+                  "span": {
+                    "start": {
+                      "offset": 167,
+                      "line": 6,
+                      "column": 13
+                    },
+                    "end": {
+                      "offset": 168,
+                      "line": 6,
+                      "column": 14
+                    }
+                  },
+                  "literalType": "number",
+                  "raw": "0"
+                }
+              },
+              {
+                "kind": "VariableDeclarator",
+                "span": {
+                  "start": {
+                    "offset": 170,
+                    "line": 6,
+                    "column": 16
+                  },
+                  "end": {
+                    "offset": 180,
+                    "line": 6,
+                    "column": 26
+                  }
+                },
+                "name": "result",
+                "pointerDepth": 0,
+                "arraySizes": [],
+                "initializer": {
+                  "kind": "Literal",
+                  "span": {
+                    "start": {
+                      "offset": 179,
+                      "line": 6,
+                      "column": 25
+                    },
+                    "end": {
+                      "offset": 180,
+                      "line": 6,
+                      "column": 26
+                    }
+                  },
+                  "literalType": "number",
+                  "raw": "0"
+                }
+              }
+            ]
+          },
+          {
+            "kind": "WhileStatement",
+            "span": {
+              "start": {
+                "offset": 186,
+                "line": 7,
+                "column": 5
+              },
+              "end": {
+                "offset": 240,
+                "line": 9,
+                "column": 6
+              }
+            },
+            "test": {
+              "kind": "BinaryExpression",
+              "span": {
+                "start": {
+                  "offset": 193,
+                  "line": 7,
+                  "column": 12
+                },
+                "end": {
+                  "offset": 202,
+                  "line": 7,
+                  "column": 21
+                }
+              },
+              "operator": "<",
+              "left": {
+                "kind": "Identifier",
+                "span": {
+                  "start": {
+                    "offset": 193,
+                    "line": 7,
+                    "column": 12
+                  },
+                  "end": {
+                    "offset": 194,
+                    "line": 7,
+                    "column": 13
+                  }
+                },
+                "name": "i"
+              },
+              "right": {
+                "kind": "Identifier",
+                "span": {
+                  "start": {
+                    "offset": 197,
+                    "line": 7,
+                    "column": 16
+                  },
+                  "end": {
+                    "offset": 202,
+                    "line": 7,
+                    "column": 21
+                  }
+                },
+                "name": "count"
+              }
+            },
+            "body": {
+              "kind": "BlockStatement",
+              "span": {
+                "start": {
+                  "offset": 204,
+                  "line": 7,
+                  "column": 23
+                },
+                "end": {
+                  "offset": 240,
+                  "line": 9,
+                  "column": 6
+                }
+              },
+              "statements": [
+                {
+                  "kind": "ExpressionStatement",
+                  "span": {
+                    "start": {
+                      "offset": 214,
+                      "line": 8,
+                      "column": 9
+                    },
+                    "end": {
+                      "offset": 234,
+                      "line": 8,
+                      "column": 29
+                    }
+                  },
+                  "expression": {
+                    "kind": "AssignmentExpression",
+                    "span": {
+                      "start": {
+                        "offset": 214,
+                        "line": 8,
+                        "column": 9
+                      },
+                      "end": {
+                        "offset": 233,
+                        "line": 8,
+                        "column": 28
+                      }
+                    },
+                    "operator": "+=",
+                    "left": {
+                      "kind": "Identifier",
+                      "span": {
+                        "start": {
+                          "offset": 214,
+                          "line": 8,
+                          "column": 9
+                        },
+                        "end": {
+                          "offset": 220,
+                          "line": 8,
+                          "column": 15
+                        }
+                      },
+                      "name": "result"
+                    },
+                    "right": {
+                      "kind": "IndexExpression",
+                      "span": {
+                        "start": {
+                          "offset": 224,
+                          "line": 8,
+                          "column": 19
+                        },
+                        "end": {
+                          "offset": 233,
+                          "line": 8,
+                          "column": 28
+                        }
+                      },
+                      "object": {
+                        "kind": "Identifier",
+                        "span": {
+                          "start": {
+                            "offset": 224,
+                            "line": 8,
+                            "column": 19
+                          },
+                          "end": {
+                            "offset": 228,
+                            "line": 8,
+                            "column": 23
+                          }
+                        },
+                        "name": "data"
+                      },
+                      "index": {
+                        "kind": "UpdateExpression",
+                        "span": {
+                          "start": {
+                            "offset": 229,
+                            "line": 8,
+                            "column": 24
+                          },
+                          "end": {
+                            "offset": 232,
+                            "line": 8,
+                            "column": 27
+                          }
+                        },
+                        "operator": "++",
+                        "prefix": false,
+                        "argument": {
+                          "kind": "Identifier",
+                          "span": {
+                            "start": {
+                              "offset": 229,
+                              "line": 8,
+                              "column": 24
+                            },
+                            "end": {
+                              "offset": 230,
+                              "line": 8,
+                              "column": 25
+                            }
+                          },
+                          "name": "i"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": "DoWhileStatement",
+            "span": {
+              "start": {
+                "offset": 245,
+                "line": 10,
+                "column": 5
+              },
+              "end": {
+                "offset": 283,
+                "line": 10,
+                "column": 43
+              }
+            },
+            "body": {
+              "kind": "BlockStatement",
+              "span": {
+                "start": {
+                  "offset": 248,
+                  "line": 10,
+                  "column": 8
+                },
+                "end": {
+                  "offset": 262,
+                  "line": 10,
+                  "column": 22
+                }
+              },
+              "statements": [
+                {
+                  "kind": "ExpressionStatement",
+                  "span": {
+                    "start": {
+                      "offset": 250,
+                      "line": 10,
+                      "column": 10
+                    },
+                    "end": {
+                      "offset": 260,
+                      "line": 10,
+                      "column": 20
+                    }
+                  },
+                  "expression": {
+                    "kind": "UpdateExpression",
+                    "span": {
+                      "start": {
+                        "offset": 250,
+                        "line": 10,
+                        "column": 10
+                      },
+                      "end": {
+                        "offset": 259,
+                        "line": 10,
+                        "column": 19
+                      }
+                    },
+                    "operator": "++",
+                    "prefix": false,
+                    "argument": {
+                      "kind": "Identifier",
+                      "span": {
+                        "start": {
+                          "offset": 250,
+                          "line": 10,
+                          "column": 10
+                        },
+                        "end": {
+                          "offset": 257,
+                          "line": 10,
+                          "column": 17
+                        }
+                      },
+                      "name": "counter"
+                    }
+                  }
+                }
+              ]
+            },
+            "test": {
+              "kind": "BinaryExpression",
+              "span": {
+                "start": {
+                  "offset": 270,
+                  "line": 10,
+                  "column": 30
+                },
+                "end": {
+                  "offset": 281,
+                  "line": 10,
+                  "column": 41
+                }
+              },
+              "operator": "<",
+              "left": {
+                "kind": "Identifier",
+                "span": {
+                  "start": {
+                    "offset": 270,
+                    "line": 10,
+                    "column": 30
+                  },
+                  "end": {
+                    "offset": 277,
+                    "line": 10,
+                    "column": 37
+                  }
+                },
+                "name": "counter"
+              },
+              "right": {
+                "kind": "Literal",
+                "span": {
+                  "start": {
+                    "offset": 280,
+                    "line": 10,
+                    "column": 40
+                  },
+                  "end": {
+                    "offset": 281,
+                    "line": 10,
+                    "column": 41
+                  }
+                },
+                "literalType": "number",
+                "raw": "2"
+              }
+            }
+          },
+          {
+            "kind": "ReturnStatement",
+            "span": {
+              "start": {
+                "offset": 288,
+                "line": 11,
+                "column": 5
+              },
+              "end": {
+                "offset": 302,
+                "line": 11,
+                "column": 19
+              }
+            },
+            "argument": {
+              "kind": "Identifier",
+              "span": {
+                "start": {
+                  "offset": 295,
+                  "line": 11,
+                  "column": 12
+                },
+                "end": {
+                  "offset": 301,
+                  "line": 11,
+                  "column": 18
+                }
+              },
+              "name": "result"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

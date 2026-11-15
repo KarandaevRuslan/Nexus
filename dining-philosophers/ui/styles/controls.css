@@ -1,0 +1,120 @@
+.controls-panel {
+  padding:25px 26px
+}
+
+.control-actions {
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:9px;
+  margin:26px 0
+}
+
+.button {
+  padding:13px 6px;
+  border-radius:11px;
+  font-weight:800;
+  font-size:11px;
+  border:1px solid #41524a;
+  transition:background .12s ease
+}
+
+.button:not(:disabled):hover {
+  filter:brightness(1.14)
+}
+
+.button-primary {
+  background:#e3bc79;
+  color:#1b2621;
+  border-color:#e3bc79
+}
+
+.button-secondary {
+  background:#2c403b;
+  color:#d6e4da
+}
+
+.button-danger {
+  background:#2b3432;
+  color:#e6a1a0;
+  border-color:#604849
+}
+
+.field-row {
+  margin-top:19px
+}
+
+.field-row label {
+  display:flex;
+  justify-content:space-between;
+  color:#baccc3;
+  font-size:12px;
+  font-weight:700
+}
+
+.field-row label span {
+  color:#e2bd80
+}
+
+.field-row input[type=range] {
+  display:block;
+  width:100%;
+  margin:15px 0 0;
+  accent-color:#e5bc77;
+  height:5px
+}
+
+.field-split {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:29px
+}
+
+.field-split label {
+  font-size:11px;
+  font-weight:700;
+  color:#9db2a8
+}
+
+.field-split input,.field-split select {
+  display:block;
+  width:100%;
+  padding:10px 11px;
+  margin-top:8px;
+  border:1px solid #45534e;
+  border-radius:9px;
+  background:#172321;
+  color:#e4eade;
+  max-width:100%;
+  min-width:0
+}
+
+.config-actions {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  border-top:1px solid #34413e;
+  padding-top:20px;
+  margin-top:24px
+}
+
+.text-button {
+  border:none;
+  background:transparent;
+  color:#e1bd83;
+  padding:7px 0;
+  font-size:11px;
+  font-weight:700;
+  text-align:left
+}
+
+.text-button:hover:not(:disabled) {
+  text-decoration:underline
+}
+
+.control-note {
+  color:#809990;
+  font-size:11px;
+  line-height:1.6;
+  margin:16px 0 0
+}

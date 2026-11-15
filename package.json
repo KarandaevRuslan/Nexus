@@ -1,0 +1,81 @@
+{
+  "name": "nexus-prototype",
+  "version": "0.1.18",
+  "private": true,
+  "description": "Transactional reactive TypeScript runtime with optional Frida adapters",
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node dist/tests/run.js",
+    "demo": "npm run build && node dist/examples/inventory-mock.js",
+    "conflict-demo": "npm run build && node dist/examples/conflict-policies.js",
+    "collatz-demo": "npm run build && node dist/examples/collatz-run.js",
+    "events-demo": "npm run build && node dist/examples/events-run.js",
+    "test:integration": "npm run build && node tests/integration.cjs .",
+    "test:all": "npm run typecheck && npm test && npm run test:integration && npm run test:bootstrap && npm run test:ports && npm run check:architecture && npm run test:architecture && npm run check:exports && npm run build:agent && npm run smoke:agent && npm run check:package && npm run c-ast:test",
+    "check:architecture": "node scripts/check-architecture.cjs",
+    "test:architecture": "node --unhandled-rejections=strict tests/architecture-gates.cjs",
+    "test:bootstrap": "node --unhandled-rejections=strict tests/bootstrap.cjs",
+    "check:exports": "node scripts/check-exports.cjs",
+    "check:package": "node scripts/check-package.cjs",
+    "build:agent": "npm run build && node scripts/build-agent.cjs --entry dist/examples/frida-agent.js --out dist/agents/native.js && node scripts/build-agent.cjs --entry dist/examples/frida-smoke-agent.js --out dist/agents/smoke.js",
+    "smoke:agent": "node scripts/smoke-agent.cjs",
+    "test:e2e:real": "node scripts/e2e/real-frida.cjs",
+    "test:ports": "node --unhandled-rejections=strict tests/service-ports.cjs",
+    "collatz-graph-demo": "npm run build && node dist/examples/collatz-graph-run.js",
+    "philosophers:dev": "npm --prefix dining-philosophers run dev",
+    "philosophers:build": "npm --prefix dining-philosophers run build",
+    "philosophers:test": "tsc -p dining-philosophers/tsconfig.model.json && node dining-philosophers/tests/run.cjs",
+    "c-ast:build": "tsc -p c-ast/tsconfig.json",
+    "c-ast:parse": "npm run c-ast:build && node dist/c-ast/cli/main.js",
+    "c-ast:demo": "npm run c-ast:parse -- c-ast/fixtures/factorial.c",
+    "c-ast:test": "npm run c-ast:build && node c-ast/tests/run.cjs && node c-ast/tests/reactive.cjs",
+    "c-ast:steps": "npm run c-ast:build && node dist/c-ast/cli/step-demo.js",
+    "check:release": "node scripts/check-release.cjs"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "require": "./dist/src/index.js",
+      "default": "./dist/src/index.js"
+    },
+    "./core": {
+      "types": "./dist/src/core/index.d.ts",
+      "require": "./dist/src/core/index.js",
+      "default": "./dist/src/core/index.js"
+    },
+    "./frida": {
+      "types": "./dist/src/frida/index.d.ts",
+      "require": "./dist/src/frida/index.js",
+      "default": "./dist/src/frida/index.js"
+    },
+    "./core/index": {
+      "types": "./dist/src/core/index.d.ts",
+      "require": "./dist/src/core/index.js"
+    },
+    "./frida/index": {
+      "types": "./dist/src/frida/index.d.ts",
+      "require": "./dist/src/frida/index.js"
+    },
+    "./frida-adapter": {
+      "types": "./dist/src/frida-adapter.d.ts",
+      "require": "./dist/src/frida-adapter.js"
+    }
+  },
+  "files": [
+    "dist/src/",
+    "README.md",
+    "ARCHITECTURE.md",
+    "LICENSE.md"
+  ],
+  "engines": {
+    "node": ">=22.16.0"
+  }
+}

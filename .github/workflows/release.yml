@@ -1,0 +1,52 @@
+name: GitHub release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+          cache: npm
+      - name: Check tag matches package version
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          node -e "const pkg = require('./package.json'); if (process.env.RELEASE_TAG !== 'v' + pkg.version) { throw new Error('Tag does not match package.json version'); }"
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: Test and build the library
+        run: npm run test:all
+        env:
+          NODE_OPTIONS: --unhandled-rejections=strict
+      - name: Verify package file allowlist
+        run: npm run check:release
+      - name: Build release tarball
+        run: |
+          mkdir -p release
+          npm pack --ignore-scripts --pack-destination release
+          test "$(find release -maxdepth 1 -name '*.tgz' | wc -l)" -eq 1
+      - name: Create release or replace its tarball on rerun
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" release/*.tgz --clobber
+          else
+            gh release create "$RELEASE_TAG" release/*.tgz \
+              --verify-tag --generate-notes --title "Nexus $RELEASE_TAG"
+          fi
