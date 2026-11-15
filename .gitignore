@@ -48,6 +48,8 @@ Thumbs.db
 # Deliberately ignore them even inside examples/docs by default.
 *.svg
 *.png
+# The reviewed Nexus logo is deliberately tracked for the README and package.
+!/assets/nexus-icon.png
 *.jpg
 *.jpeg
 *.gif

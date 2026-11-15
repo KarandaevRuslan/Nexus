@@ -1,6 +1,6 @@
 # Dining Philosophers — React + Nexus
 
-Отдельное React-приложение на **Nexus v0.1.18**. Оно размещено **рядом с** `examples/`, а не внутри `src/`. Код ядра Nexus не меняется, приложение импортирует только его публичный Core API.
+Отдельное React-приложение на **Nexus v0.1.20**. Оно размещено **рядом с** `examples/`, а не внутри `src/`. Код ядра Nexus не меняется: приложение импортирует `nexus/core` **из установленного `.tgz`**, а не по относительному пути `../src/core`.
 
 Основа проекта — присланный JavaFX-проект `DinningPhilosophers.zip`. Сохранены круглый стол, пять философов по умолчанию, независимые периоды размышления/еды, случайный выбор свободного места, атомарное получение обеих вилок, журнал событий, изменение времени еды и кнопки Start / Pause / Continue / Stop.
 
@@ -9,23 +9,25 @@
 Из **корня проекта Nexus**:
 
 ```powershell
-cd dining-philosophers
-npm install
-npm run dev
+npm ci
+npm run examples:install
+npm run philosophers:dev
 ```
+
+`examples:install` сначала собирает архив `nexus-0.1.20.tgz`, затем запускает `npm ci` для обоих примеров. `dining-philosophers/package.json` использует `"nexus": "file:../nexus-0.1.20.tgz"`. При выносе приложения в отдельный репозиторий поменяйте путь на скачанный архив релиза либо URL GitHub Release.
 
 Откройте URL, который покажет Vite (обычно **http://localhost:5173**).
 
 Продакшн-сборка:
 
 ```powershell
-npm run build
-npm run preview
+npm run philosophers:build
+npm --prefix dining-philosophers run preview
 ```
 
-В сборку Vite включаются TypeScript-модули из соседнего `../src/core`; **ядро остаётся в своём каталоге, приложение не добавляет ничего в `src/`**.
+Vite собирает исходники React-приложения и подключённый пакет `nexus` из `node_modules`. Код `../src/core` не импортируется, путь к исходникам Nexus не разрешён в Vite вручную.
 
-Проверка симуляции **без React/Vite и без новых npm-пакетов** из корня Nexus (при установленном TypeScript):
+Проверка симуляции **без React/Vite**, из корня Nexus после `npm run prepare:examples` (при установленном TypeScript):
 
 ```powershell
 npm run philosophers:test
@@ -49,9 +51,9 @@ npm run philosophers:test
 
 ```text
 nexus/
-├── src/                      # Только библиотека Nexus; НЕ изменена
-├── examples/                 # Примеры библиотеки; НЕ изменены
-└── dining-philosophers/      # Полностью самостоятельное приложение
+├── src/                      # Только библиотека Nexus
+├── examples/                 # Примеры библиотеки
+└── dining-philosophers/      # Отдельный пакетный consumer
     ├── domain/
     │   ├── types.ts          # Состояние стола, философов, конфигурация
     │   ├── random.ts         # Воспроизводимый выбор места/длительности

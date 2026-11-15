@@ -32,5 +32,13 @@ jobs:
         run: npm run test:all
         env:
           NODE_OPTIONS: --unhandled-rejections=strict
+      - name: Install example projects from the locked Nexus tarball
+        run: |
+          npm --prefix c-ast ci --ignore-scripts
+          npm --prefix dining-philosophers ci --ignore-scripts
+      - name: Validate installed consumers and Vite production build
+        run: |
+          npm --prefix c-ast test
+          npm run philosophers:build
       - name: Validate GitHub release package contents
         run: npm run check:release

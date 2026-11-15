@@ -4,16 +4,16 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
-const { createCParser, parseCSource, parseTokens, lex, CParseError } = require('../../dist/c-ast');
-const { createLexerMachine, advanceLexer, tokensFromLexer } = require('../../dist/c-ast/language/lexer-machine');
-const { createParserMachine, advanceParser } = require('../../dist/c-ast/language/parser-machine');
-const root = path.resolve(__dirname, '../..');
+const { createCParser, parseCSource, parseTokens, lex, CParseError } = require('../dist');
+const { createLexerMachine, advanceLexer, tokensFromLexer } = require('../dist/language/lexer-machine');
+const { createParserMachine, advanceParser } = require('../dist/language/parser-machine');
+const root = path.resolve(__dirname, '..');
 let passed = 0, failed = 0;
 function check(name, run) {
   try { run(); passed++; console.log(`  ✔ ${name}`); }
   catch (error) { failed++; console.error(`  ✘ ${name}:`, error.stack || error); }
 }
-const fixture = name => fs.readFileSync(path.join(root, 'c-ast/fixtures', name), 'utf8');
+const fixture = name => fs.readFileSync(path.join(root, 'fixtures', name), 'utf8');
 const reference = (source, filename='<input>') => parseTokens(lex(source, filename), filename);
 function stepAll(source, filename='<input>') {
   let s = createLexerMachine(source,filename);
@@ -214,8 +214,8 @@ check('two independent Nexus parser sessions can interleave manual steps', () =>
   } finally { first.dispose(); second.dispose(); }
 });
 check('CLI --trace keeps standard output valid JSON and records committed steps to stderr', () => {
-  const cli=path.join(root,'dist/c-ast/cli/main.js');
-  const fixtureFile=path.join(root,'c-ast/fixtures/factorial.c');
+  const cli=path.join(root,'dist/cli/main.js');
+  const fixtureFile=path.join(root,'fixtures/factorial.c');
   const proc=spawnSync(process.execPath,[cli,fixtureFile,'--stdout','--trace','--batch-size=1'],{encoding:'utf8'});
   assert.equal(proc.status,0,proc.stderr);
   assert.deepEqual(JSON.parse(proc.stdout),reference(fixture('factorial.c')));

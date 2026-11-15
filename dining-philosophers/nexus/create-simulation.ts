@@ -1,4 +1,4 @@
-import { Dispatcher, type Store, type Scope } from "../../src/core";
+import { Dispatcher, type Store, type Scope } from "nexus/core";
 import { checkTableInvariants } from "../domain/invariants";
 import { changeEatDuration, makeTable, pauseTable, resumeTable, startTable, stopTable, validateConfig } from "../domain/table";
 import type { SimulationConfig, TableListener, TableState } from "../domain/types";

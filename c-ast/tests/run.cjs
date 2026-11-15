@@ -5,9 +5,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 const { spawnSync } = require('node:child_process');
-const { parseCSource, createCParser, lex, CParseError } = require('../../dist/c-ast');
-const root = path.resolve(__dirname, '../..');
-const fixture = name => fs.readFileSync(path.join(root, 'c-ast', 'fixtures', name), 'utf8');
+const { parseCSource, createCParser, lex, CParseError } = require('../dist');
+const root = path.resolve(__dirname, '..');
+const fixture = name => fs.readFileSync(path.join(root, 'fixtures', name), 'utf8');
 let pass = 0;
 let fail = 0;
 const check = (name, fn) => {
@@ -192,8 +192,8 @@ check('CLI writes AST to explicit JSON path and stdout', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'nexus-c-ast-'));
   try {
     const output = path.join(temp, 'ast.json');
-    const cli = path.resolve(root, 'dist/c-ast/cli/main.js');
-    const input = path.resolve(root, 'c-ast/fixtures/factorial.c');
+    const cli = path.resolve(root, 'dist/cli/main.js');
+    const input = path.resolve(root, 'fixtures/factorial.c');
     const written = spawnSync(process.execPath, [cli, input, output], {encoding: 'utf8'});
     assert.equal(written.status, 0, written.stderr);
     assert.equal(JSON.parse(fs.readFileSync(output, 'utf8')).kind, 'TranslationUnit');
@@ -203,8 +203,8 @@ check('CLI writes AST to explicit JSON path and stdout', () => {
   } finally { fs.rmSync(temp, {recursive: true, force: true}); }
 });
 check('CLI failure returns nonzero and source location', () => {
-  const cli = path.resolve(root, 'dist/c-ast/cli/main.js');
-  const input = path.resolve(root, 'c-ast/fixtures/invalid.c');
+  const cli = path.resolve(root, 'dist/cli/main.js');
+  const input = path.resolve(root, 'fixtures/invalid.c');
   const result = spawnSync(process.execPath, [cli, input], {encoding: 'utf8'});
   assert.equal(result.status, 1);
   assert.match(result.stderr, /invalid\.c:2:13/);

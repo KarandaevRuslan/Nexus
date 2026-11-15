@@ -1,4 +1,4 @@
-import { Context, Handler, type ReadContext } from '../../../src/core';
+import { Context, Handler, type ReadContext } from 'nexus/core';
 import type { Token } from '../../language/lexer';
 import { CParseError } from '../../language/errors';
 import { advanceLexer, tokensFromLexer } from '../../language/lexer-machine';

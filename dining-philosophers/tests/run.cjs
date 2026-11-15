@@ -5,10 +5,10 @@ const path = require('node:path');
 // The React app is ESM, but the standalone TS test output targets CommonJS.
 fs.writeFileSync(path.join(__dirname, '../.test-dist/package.json'), '{"type":"commonjs"}');
 const { test } = require('node:test');
-const {createDiningSimulation} = require('../.test-dist/dining-philosophers/nexus/create-simulation.js');
-const {makeTable, startTable, advanceTable} = require('../.test-dist/dining-philosophers/domain/table.js');
-const {allocateForks} = require('../.test-dist/dining-philosophers/domain/allocator.js');
-const {checkTableInvariants} = require('../.test-dist/dining-philosophers/domain/invariants.js');
+const {createDiningSimulation} = require('../.test-dist/nexus/create-simulation.js');
+const {makeTable, startTable, advanceTable} = require('../.test-dist/domain/table.js');
+const {allocateForks} = require('../.test-dist/domain/allocator.js');
+const {checkTableInvariants} = require('../.test-dist/domain/invariants.js');
 
 const config = (count = 5, seed = 42, eatMs = 250) => ({ count, seed, eatMs });
 const withEngine = (opts, fn) => { const e = createDiningSimulation(opts); try { fn(e); } finally {e.dispose();} };

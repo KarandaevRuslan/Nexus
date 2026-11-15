@@ -1,4 +1,4 @@
-import { Context } from '../../../src/core';
+import { Context } from 'nexus/core';
 import { CParseError } from '../../language/errors';
 import type { Failure, PipelineStores, RunState } from '../pipeline';
 

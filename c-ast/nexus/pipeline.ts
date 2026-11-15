@@ -1,5 +1,5 @@
 /** Data-only wiring contract. No domain logic, scheduling or global singleton. */
-import type { Event, Scope, Store } from '../../src/core';
+import type { Event, Scope, Store } from 'nexus/core';
 import type { AstMetrics, TranslationUnit, Span } from '../language/ast';
 import type { Token } from '../language/lexer';
 import type { LexerMachineState } from '../language/lexer-machine';

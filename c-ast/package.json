@@ -1,0 +1,22 @@
+{
+  "name": "nexus-c-ast-example",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Standalone C AST example consuming the packaged Nexus runtime",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node tests/run.cjs && node tests/reactive.cjs",
+    "parse": "npm run build && node dist/cli/main.js",
+    "steps": "npm run build && node dist/cli/step-demo.js"
+  },
+  "dependencies": {
+    "nexus": "file:../nexus-0.1.20.tgz"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22.16.0"
+  }
+}

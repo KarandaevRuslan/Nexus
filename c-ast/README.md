@@ -1,15 +1,17 @@
 # C AST — пошаговый лексер и парсер на Nexus
 
-Это **отдельное приложение** в `c-ast/`, рядом с `examples/`. Файлы `src/` принадлежат библиотеке Nexus и в этой работе не менялись.
+Это **отдельное приложение** в `c-ast/`, рядом с `examples/`. Проект импортирует `nexus/core` как готовый пакет из `c-ast/node_modules/nexus`, а не из `../src/core`.
 
 В отличие от старой версии, **основной путь не вызывает `lex(source)` или `parseTokens(tokens)`**. Nexus управляет реальными переходами лексера и синтаксического анализатора: состояние автоматов находится в `Store`, а новые порции работы запрашиваются с помощью `Event`.
 
 ## Windows PowerShell
 
-В корне проекта:
+В корне проекта Nexus (сначала соберите пакет и установите его содержимое в приложение):
 
 ```powershell
-npm install
+npm ci
+npm run build
+npm run prepare:examples
 npm run c-ast:parse -- .\c-ast\fixtures\factorial.c
 npm run c-ast:parse -- .\c-ast\fixtures\factorial.c .\output\factorial.json
 npm run c-ast:parse -- .\c-ast\fixtures\factorial.c --stdout
@@ -18,6 +20,8 @@ npm run c-ast:parse -- .\c-ast\fixtures\factorial.c --batch-size=1
 npm run c-ast:steps
 npm run c-ast:test
 ```
+
+Для полноценной автономной установки зависимостей C AST выполните `npm --prefix c-ast ci` после создания корневого `nexus-0.1.20.tgz`. В `c-ast/package.json` закреплена зависимость `"nexus": "file:../nexus-0.1.20.tgz"`, и при компиляции используются только публичные типы пакета. Для использования отдельно от этого репозитория замените локальный путь к `.tgz` на путь к скачанному GitHub Release или прямую ссылку на релиз.
 
 Файл `factorial.ast.json` появляется рядом с входным `.c`, если не указан другой выходной путь. `--trace` печатает сведения о **зафиксированных** токенах и AST-узлах в `stderr` (это не портит JSON в `stdout`). `--batch-size=N` настраивает количество машинных переходов, выполняемых за один Commit.
 

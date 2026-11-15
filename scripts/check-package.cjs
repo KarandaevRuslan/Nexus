@@ -3,7 +3,8 @@
 /** Smoke the generated CJS package layout and declarations, not unpublished npm registry. */
 const fs=require('node:fs'),path=require('node:path'),ts=require('typescript');
 const root=path.resolve(__dirname,'..');const pkg=require('../package.json');
-if(pkg.private!==true||pkg.type!=='commonjs')throw new Error('Prototype package must remain private CommonJS');
+if(pkg.name!=='nexus')throw new Error('Expected package name nexus');
+if(pkg.private!==true||pkg.type!=='commonjs')throw new Error('GitHub release package must remain private CommonJS');
 for(const entry of Object.values(pkg.exports)){
   if(!entry.require||!entry.types)throw new Error('An export has no require/types path');
   for(const name of [entry.require,entry.types]){
@@ -15,7 +16,7 @@ const namespace=require(root);
 const core=require(path.join(root,'dist/src/core/index.js'));
 const frida=require(path.join(root,'dist/src/frida/index.js'));
 if(namespace.Dispatcher!==core.Dispatcher||namespace.attachHook!==frida.attachHook)throw new Error('Built public entrypoint differs');
-if(require('nexus-prototype/core').Dispatcher!==core.Dispatcher || require('nexus-prototype/frida').attachJavaHook!==frida.attachJavaHook)throw new Error('Package self-reference exports broken');
+if(require('nexus/core').Dispatcher!==core.Dispatcher || require('nexus/frida').attachJavaHook!==frida.attachJavaHook)throw new Error('Package self-reference exports broken');
 const agent=path.join(root,'dist/agents/native.js');
 if(!fs.existsSync(agent))throw new Error('Frida bundle missing; build:agent first');
 // Compile an actual TypeScript consumer against generated .d.ts files in an

@@ -3,16 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "React + Nexus demonstration, isolated from Nexus core",
+  "description": "React + Nexus demonstration consuming the packaged Nexus release",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit -p tsconfig.json && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test:model": "tsc -p tsconfig.model.json && node tests/run.cjs"
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "nexus": "file:../nexus-0.1.20.tgz"
   },
   "devDependencies": {
     "@types/react": "^19.1.0",

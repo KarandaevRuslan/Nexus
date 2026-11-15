@@ -1,4 +1,4 @@
-import { Context, Handler, type Event, type Store } from "../../../src/core";
+import { Context, Handler, type Event, type Store } from "nexus/core";
 import { allocateForks } from "../../domain/allocator";
 import type { TableState } from "../../domain/types";
 import type { Rebalance } from "./clock-handler";

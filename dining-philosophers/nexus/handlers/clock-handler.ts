@@ -1,4 +1,4 @@
-import { Context, Handler, type Event, type Store } from "../../../src/core";
+import { Context, Handler, type Event, type Store } from "nexus/core";
 import { advanceTable } from "../../domain/table";
 import type { TableState } from "../../domain/types";
 

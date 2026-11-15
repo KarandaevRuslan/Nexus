@@ -1,6 +1,6 @@
 {
-  "name": "nexus-prototype",
-  "version": "0.1.18",
+  "name": "nexus",
+  "version": "0.1.20",
   "private": true,
   "description": "Transactional reactive TypeScript runtime with optional Frida adapters",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "collatz-demo": "npm run build && node dist/examples/collatz-run.js",
     "events-demo": "npm run build && node dist/examples/events-run.js",
     "test:integration": "npm run build && node tests/integration.cjs .",
-    "test:all": "npm run typecheck && npm test && npm run test:integration && npm run test:bootstrap && npm run test:ports && npm run check:architecture && npm run test:architecture && npm run check:exports && npm run build:agent && npm run smoke:agent && npm run check:package && npm run c-ast:test",
+    "test:all": "npm run typecheck && npm test && npm run test:integration && npm run test:bootstrap && npm run test:ports && npm run check:architecture && npm run test:architecture && npm run check:exports && npm run build:agent && npm run smoke:agent && npm run check:package && npm run prepare:examples && npm run c-ast:test && npm run philosophers:test",
     "check:architecture": "node scripts/check-architecture.cjs",
     "test:architecture": "node --unhandled-rejections=strict tests/architecture-gates.cjs",
     "test:bootstrap": "node --unhandled-rejections=strict tests/bootstrap.cjs",
@@ -29,11 +29,14 @@
     "philosophers:build": "npm --prefix dining-philosophers run build",
     "philosophers:test": "tsc -p dining-philosophers/tsconfig.model.json && node dining-philosophers/tests/run.cjs",
     "c-ast:build": "tsc -p c-ast/tsconfig.json",
-    "c-ast:parse": "npm run c-ast:build && node dist/c-ast/cli/main.js",
+    "c-ast:parse": "npm run c-ast:build && node c-ast/dist/cli/main.js",
     "c-ast:demo": "npm run c-ast:parse -- c-ast/fixtures/factorial.c",
     "c-ast:test": "npm run c-ast:build && node c-ast/tests/run.cjs && node c-ast/tests/reactive.cjs",
-    "c-ast:steps": "npm run c-ast:build && node dist/c-ast/cli/step-demo.js",
-    "check:release": "node scripts/check-release.cjs"
+    "c-ast:steps": "npm run c-ast:build && node c-ast/dist/cli/step-demo.js",
+    "check:release": "node scripts/check-release.cjs",
+    "prepare:examples": "node scripts/prepare-example-packages.cjs",
+    "examples:install": "npm run build && npm run prepare:examples && npm --prefix c-ast ci --ignore-scripts && npm --prefix dining-philosophers ci --ignore-scripts",
+    "test:consumers": "npm run build && npm run prepare:examples && npm run c-ast:test && npm run philosophers:test"
   },
   "devDependencies": {
     "typescript": "5.9.3"
@@ -73,9 +76,23 @@
     "dist/src/",
     "README.md",
     "ARCHITECTURE.md",
-    "LICENSE.md"
+    "LICENSE.md",
+    "assets/nexus-icon.png"
   ],
   "engines": {
     "node": ">=22.16.0"
+  },
+  "typesVersions": {
+    "*": {
+      "core": [
+        "dist/src/core/index.d.ts"
+      ],
+      "frida": [
+        "dist/src/frida/index.d.ts"
+      ],
+      "frida-adapter": [
+        "dist/src/frida-adapter.d.ts"
+      ]
+    }
   }
 }

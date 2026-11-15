@@ -14,23 +14,25 @@ This repository uses GitHub Releases to distribute the **built CommonJS library 
 
 ```bash
 npm ci
-npm run test:all
+npm run test:all             # also tests C AST and philosophers against the packed package
+npm run examples:install     # installs both example projects and their npm dependencies
+npm run philosophers:build   # React/Vite consumer build
 npm run check:release
 npm pack --ignore-scripts
 ```
 
-Inspect the package archive: it should contain `dist/src/` plus `package.json`, `README.md`, `ARCHITECTURE.md`, and `LICENSE.md`, and **no** sample Frida agent, screenshots, fixtures, or test artifacts.
+Inspect the package archive: it should contain `dist/src/` plus `package.json`, `README.md`, `ARCHITECTURE.md`, and `LICENSE.md`, the approved `assets/nexus-icon.png`, and **no** sample Frida agent, other images, fixtures, or test artifacts.
 
-Update `package.json` and `package-lock.json` together for a new release number, update `CHANGELOG.md`, and commit changes. Push the repository and an **annotated version tag** matching the package version (for example `v0.1.18`):
+Update `package.json` and `package-lock.json` together for a new release number, update `CHANGELOG.md`, and commit changes. Push the repository and an **annotated version tag** matching the package version (for example `v0.1.20`):
 
 ```bash
-git tag -a v0.1.18 -m 'Nexus v0.1.18'
+git tag -a v0.1.20 -m 'Nexus v0.1.20'
 git push origin main
-git push origin v0.1.18
+git push origin v0.1.20
 ```
 
 The tag-triggered workflow repeats the test suite and package file check, then creates a GitHub Release and attaches the `.tgz` archive. It never invokes `npm publish`. Keep branch protection and require the CI check before merging changes.
 
 ## After release
 
-Install the attached `.tgz` into a separate consumer project and test `require('nexus-prototype/core')`, `require('nexus-prototype/frida')`, and the TypeScript declarations. Do not describe real Frida integration as validated until the manual device tests in `scripts/e2e/README.md` have actually run.
+Install the attached `.tgz` into a separate consumer project and test `require('nexus/core')`, `require('nexus/frida')`, and the TypeScript declarations. Do not describe real Frida integration as validated until the manual device tests in `scripts/e2e/README.md` have actually run.

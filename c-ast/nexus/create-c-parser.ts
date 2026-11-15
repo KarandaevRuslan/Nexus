@@ -1,4 +1,4 @@
-import { Dispatcher } from '../../src/core';
+import { Dispatcher } from 'nexus/core';
 import type { AstMetrics, TranslationUnit, Span } from '../language/ast';
 import type { Token } from '../language/lexer';
 import type { SourceInput, Pulse, Signal, Failure, ParserPorts, RunState, Stage } from './pipeline';

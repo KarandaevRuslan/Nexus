@@ -1,4 +1,4 @@
-import { Context, Handler, type Event, type Scope, type Store } from "../../../src/core";
+import { Context, Handler, type Event, type Scope, type Store } from "nexus/core";
 import type { TableState } from "../../domain/types";
 import type { MealStarted } from "./fork-arbiter";
 

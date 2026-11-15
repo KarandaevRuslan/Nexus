@@ -1,4 +1,4 @@
-import { Context, Handler } from '../../../src/core';
+import { Context, Handler } from 'nexus/core';
 import { createLexerMachine } from '../../language/lexer-machine';
 import type { ParserPorts, RunState } from '../pipeline';
 

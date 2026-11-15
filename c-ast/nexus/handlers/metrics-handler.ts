@@ -1,4 +1,4 @@
-import { Context, Handler, type ReadContext } from '../../../src/core';
+import { Context, Handler, type ReadContext } from 'nexus/core';
 import { countAstNodes } from '../../language/ast';
 import type { ParserPorts, RunState } from '../pipeline';
 

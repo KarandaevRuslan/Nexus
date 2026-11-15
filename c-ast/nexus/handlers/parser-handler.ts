@@ -1,4 +1,4 @@
-import { Context, Handler, type ReadContext } from '../../../src/core';
+import { Context, Handler, type ReadContext } from 'nexus/core';
 import type { Span } from '../../language/ast';
 import { CParseError } from '../../language/errors';
 import { advanceParser } from '../../language/parser-machine';

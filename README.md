@@ -1,42 +1,129 @@
-# Nexus
+<h1 align="center">
+  <br>
+  <img src="assets/nexus-icon.png" width="170" alt="Nexus library icon">
+  <br>
+  <b>Nexus</b>
+  <br>
+</h1>
 
-**Nexus** is a TypeScript transactional and reactive runtime for coordinating state changes, events, and handlers. It also provides **optional** adapters for Frida Native, Java, and IL2CPP instrumentation.
+<p align="center">
+  A transactional reactive runtime for TypeScript, with optional Frida instrumentation adapters.
+</p>
 
-The current version is **0.1.18**. The package is **CommonJS** and requires **Node.js 22.16.0 or later** for its supported build and test workflow. This is an early release, not a promise of production-ready Frida compatibility.
+<p align="center">
+  <img src="https://img.shields.io/badge/version-0.1.20-667eea" alt="Version 0.1.20">
+  <img src="https://img.shields.io/badge/TypeScript-5.9.3-3178c6" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Node.js-%E2%89%A522.16-43853d" alt="Node.js 22.16 or newer">
+  <img src="https://img.shields.io/badge/module-CommonJS-3b82f6" alt="CommonJS">
+  <img src="https://img.shields.io/badge/license-MIT-22c55e" alt="MIT License">
+  <img src="https://img.shields.io/badge/distribution-GitHub%20Releases-a855f7" alt="GitHub Releases">
+</p>
 
-## Highlights
+---
 
-- **Stores** hold versioned, dispatcher-owned state; reads and writes go through a transaction context.
-- **Events** deliver transactional messages without retaining a latest value.
-- **Handlers** react to Store changes or Event occurrences, with `inline` or `deferred` execution and `latest` or `each` delivery.
-- **Atomic commits** validate transaction drafts before publishing state changes; post-commit effects are kept separate.
-- **Scopes** own registrations and resources for explicit cleanup.
-- **Frida adapters** are optional and independent of the Core; the Node package is **not** itself a loadable Frida agent.
+## Overview
 
-## Install / build
+**Nexus** coordinates state, events, and reactive handlers through explicit transactions. A dispatcher applies changes atomically, then schedules reactions. The optional Frida adapters build on the same runtime for Native, Java, and IL2CPP instrumentation.
 
-To work from a clone:
+The library is published as a **versioned CommonJS `.tgz` package attached to GitHub Releases**. It is **not published to the public npm registry** (`private: true`). Install the downloaded archive in other projects; do not assume `npm install nexus` refers to this library.
+
+This repository also contains two consumer applications, **C AST** and **Dining Philosophers**, which are tested against a **packed copy** of Nexus instead of importing its source tree.
+
+---
+
+## Features
+
+- **Transactional stores:** state is read or changed through a `Context`, not mutated directly.
+- **Events:** transient signals for workflows, separate from retained store state.
+- **Reactive handlers:** configure triggers, execution mode (`inline` / `deferred`), and delivery (`latest` / `each`).
+- **Atomic commits:** validate changes before publication; schedule reactions after successful commits.
+- **Scoped lifetimes:** registrations and owned resources can be released explicitly.
+- **Causality-aware scheduling:** distinguish a committed transaction from its managed downstream reactions.
+- **Optional Frida adapters:** Native hooks, module observation, Java hooks, and IL2CPP hooks.
+- **TypeScript declarations:** `.d.ts` files accompany the compiled JavaScript package.
+
+---
+
+## Table of Contents
+
+1. [Repository Structure](#repository-structure)
+2. [Download and Installation](#download-and-installation)
+3. [Quick Start](#quick-start)
+4. [Public Package Entry Points](#public-package-entry-points)
+5. [Example Applications](#example-applications)
+6. [Architecture](#architecture)
+7. [Frida Integration](#frida-integration)
+8. [Development and Testing](#development-and-testing)
+9. [Limitations](#limitations)
+10. [Documentation](#documentation)
+11. [Contributing](#contributing)
+12. [License](#license)
+
+---
+
+## Repository Structure
+
+```text
+nexus/
+├── assets/
+│   └── nexus-icon.png              # Explicitly approved project icon
+├── src/
+│   ├── core/                       # Dispatcher, transactions, scheduling
+│   └── frida/                      # Optional instrumentation adapters
+├── tests/                          # Library test suite
+├── examples/                       # Library development examples
+├── c-ast/                           # Standalone consumer of nexus/core
+│   ├── language/
+│   ├── nexus/
+│   ├── tests/
+│   └── package.json
+├── dining-philosophers/            # React/Vite consumer of nexus/core
+│   ├── domain/
+│   ├── nexus/
+│   ├── ui/
+│   └── package.json
+├── scripts/                         # Validation and package tooling
+├── .github/workflows/              # CI and GitHub Release automation
+└── package.json
+```
+
+`dist/`, `node_modules/`, generated `.tgz` archives and non-approved images are ignored by Git. The logo is the only explicitly allowlisted PNG. The published package includes compiled `dist/src/`, this README, the logo, and the license/architecture files—not the test applications or sample agents.
+
+---
+
+## Download and Installation
+
+### From a GitHub Release
+
+Download `nexus-0.1.20.tgz` from the **v0.1.20** GitHub Release, then run in the consumer project:
+
+```bash
+npm install ./nexus-0.1.20.tgz
+```
+
+Alternatively, install using the full URL of that release asset. For reproducible local installs, keep the tarball in a folder committed to the consuming project, or use a stable downloadable URL.
+
+> **Package rename:** starting in v0.1.19 the package is `nexus`, previously `nexus-prototype` (v0.1.18). Update old imports and remove the old dependency when migrating.
+
+### Build the archive from source
 
 ```bash
 npm ci
 npm run build
-npm run test:all
+npm run check:release
+npm pack --ignore-scripts
 ```
 
-For GitHub Releases, a versioned **`.tgz` npm package archive** is attached to the release. Download it and install that file in a Node project:
+The resulting `nexus-0.1.20.tgz` is a standard installable npm package; `npm pack` does **not** publish it to the registry.
 
-```bash
-npm install ./nexus-prototype-0.1.18.tgz
-```
+---
 
-The package name is currently `nexus-prototype` for compatibility with the existing entry points and checks. **It is not published to the npm registry** (`private: true`); a GitHub release does not imply npm availability. Do not use `npm install nexus-prototype` expecting this release to exist on npm.
+## Quick Start
 
-## Quick start
-
-Run this CommonJS example after installing the release tarball:
+**JavaScript (CommonJS)** — after installing the tarball:
 
 ```js
-const { Dispatcher, Handler } = require('nexus-prototype/core');
+const { Dispatcher, Handler } = require('nexus/core');
 
 const dispatcher = new Dispatcher();
 const scope = dispatcher.scope();
@@ -59,52 +146,163 @@ console.log(dispatcher.inline(ctx => ctx.read(counter))); // 1
 scope.dispose();
 ```
 
-`Dispatcher.inline()` commits synchronously. Use `dispatcher.submit()` for a queued transaction (its promise resolves after **its own** commit), or `dispatcher.submitAndWait()` to wait for Nexus-managed causal descendants. Neither method waits for unrelated I/O or external timers.
+**TypeScript:**
 
-A handler's `when()` and `run()` must be **synchronous**. Use `ctx.effect()` for work that should happen only *after* a successful commit. External side effects are not automatically rolled back.
-
-### Package entry points
-
-| Entry point | Contents |
-| --- | --- |
-| `nexus-prototype` | Public Core and Frida exports |
-| `nexus-prototype/core` | `Dispatcher`, `Store`, `Event`, `Handler`, `Context`, `Scope`, and related types |
-| `nexus-prototype/frida` | Native, Java, and IL2CPP adapter functions and types |
-| `nexus-prototype/frida-adapter` | Compatibility adapter entry point |
-
-TypeScript declarations ship alongside the compiled CommonJS JavaScript. Internal `src/core/**` modules beyond the public exports are not a supported API.
-
-## Frida integration and limitations
-
-The package exposes `attachHook`, `observeModule`, `attachJavaHook`, and `attachIl2CppHook`, but **Frida Bridge/runtime objects must be supplied by the host environment**. These APIs do not make the published CommonJS library a Frida Gadget script.
-
-For an explicitly bundled example agent, run `npm run build:agent` from a clone. This builds `dist/agents/native.js` and `dist/agents/smoke.js` locally. The **native example contains illustrative, unverified offsets and ABI assumptions** and is intentionally **excluded from the GitHub release package**. `npm run smoke:agent` tests a mocked host, not a real device. Do not deploy the sample agent to a device without independently verifying its hooks and running the real-device test matrix in [`scripts/e2e/README.md`](scripts/e2e/README.md).
-
-Current constraints include copying the full Map for snapshots, no cancellation of already-running asynchronous work on `Scope.dispose()`, and no rollback of external Bridge/I/O side effects. Borrowed Frida wrapper objects must not be held across deferred callbacks. See [Architecture](ARCHITECTURE.md) and [the detailed internal architecture notes](docs/ARCHITECTURE.md) for the remaining guarantees and trade-offs.
-
-## Development and quality gates
-
-```bash
-npm run typecheck
-npm run test:all
-npm run check:architecture
-npm run check:release  # requires npm run build first
+```ts
+import { Dispatcher, Handler, type Store } from 'nexus/core';
 ```
 
-`test:all` covers unit and integration suites, architectural import boundaries, export contracts, generated declaration compatibility, and the mock-agent smoke test. **Actual Native/ART/IL2CPP device tests are separate and manual**; CI passing is not evidence that they succeeded.
+`Dispatcher.inline()` completes its commit synchronously. `submit()` queues a transaction; `submitAndWait()` additionally waits for Nexus-managed causal descendants. These methods do not wait for unrelated timers or external I/O.
 
-This repository includes additional demos under `examples/`, the C AST experiment in `c-ast/`, and a separate dining-philosophers demo in `dining-philosophers/`. These are **source-tree examples, not part of the release package**.
+---
+
+## Public Package Entry Points
+
+| Import | Purpose |
+| --- | --- |
+| `nexus` | Public Core and Frida exports |
+| `nexus/core` | `Dispatcher`, `Store`, `Event`, `Handler`, `Scope`, `Context` |
+| `nexus/frida` | Native, Java, and IL2CPP adapters |
+| `nexus/frida-adapter` | Compatibility adapter entry point |
+
+The package ships compiled **CommonJS JavaScript** and TypeScript declarations. Deep imports into internal modules are **not supported**.
+
+---
+
+## Example Applications
+
+Both demo projects import **`nexus/core`** from their own `node_modules/nexus` directory. The repository test workflow creates an npm tarball and installs its contents for these smoke tests; no application reaches into `../src/core`.
+
+### C AST parser
+
+A step-driven lexer and parser for a **subset of C**, orchestrated with Nexus events and transactional stores. The parser keeps the grammar and lexer in its own `language/` folder.
+
+```bash
+# From the Nexus repository root:
+npm run build
+npm run prepare:examples
+npm run c-ast:test
+npm run c-ast:parse -- c-ast/fixtures/factorial.c --stdout
+```
+
+See [C AST documentation](c-ast/README.md). It is an experiment, **not** a full C11/C17 compiler.
+
+### Dining Philosophers
+
+A React/Vite demonstration of competing resource requests and atomic fork allocation using the Nexus scheduler.
+
+```bash
+# From the Nexus repository root (generates the tarball and installs demo dependencies):
+npm run examples:install
+npm run philosophers:test
+npm run philosophers:build
+npm run philosophers:dev
+```
+
+See [Dining Philosophers documentation](dining-philosophers/README.md). The virtual-time simulation tests logical concurrency, not OS-thread synchronization.
+
+When running these applications outside this repository, update their `nexus` dependency to point at the downloaded release tarball or your own stable release URL.
+
+---
+
+## Architecture
+
+```text
+ Application / Frida bridge
+           │
+           ▼
+    Dispatcher + Scope
+           │
+    ┌──────┴───────┐
+    ▼              ▼
+ Store<T>       Event<T>
+    │              │
+    └──────┬───────┘
+           ▼
+       Handler
+           │
+           ▼
+  Transaction Context
+           │
+           ▼
+     Atomic Commit
+           │
+           ▼
+   Scheduled Reactions
+```
+
+Handlers are synchronous. Keep state transitions in transactions, and use `ctx.effect()` for work that should run **only after a successful commit**. External side effects cannot be rolled back by Nexus.
+
+Details: [Architecture](ARCHITECTURE.md) and [internal architecture notes](docs/ARCHITECTURE.md).
+
+---
+
+## Frida Integration
+
+The `nexus/frida` entry point exposes APIs including `attachHook`, `observeModule`, `attachJavaHook`, and `attachIl2CppHook`. Frida's runtime APIs are supplied by the embedding environment, not by Nexus.
+
+To build the illustrative Frida agents from this repository:
+
+```bash
+npm run build:agent
+npm run smoke:agent
+```
+
+These generate local bundles in `dist/agents/`. **They are not included in the GitHub release package.** The sample Native hooks contain unverified offsets and ABI assumptions; the smoke test uses a mocked host, not a physical device. See [real-device testing instructions](scripts/e2e/README.md) before attempting device integration.
+
+---
+
+## Development and Testing
+
+**Requirements:** Node.js **22.16.0 or newer** and npm. Dependencies are locked in `package-lock.json`.
+
+```bash
+npm ci
+npm run typecheck
+npm run test:all        # includes the two packed-package consumer tests
+npm run check:release   # checks the tarball file allowlist
+```
+
+`test:all` builds the library, verifies the API and architecture, runs unit/integration and mocked Frida tests, **packs the library**, and tests both standalone examples against the packed version. The GitHub Actions workflow additionally checks the React/Vite build after installing its dependencies.
+
+For standalone consumer installs, first generate the root archive (`npm run build && npm pack --ignore-scripts`), then use `npm ci` in `c-ast/` or `dining-philosophers/`. Their package manifests refer to `../nexus-0.1.20.tgz`.
+
+---
+
+## Limitations
+
+- Nexus is an early release; production-grade Frida compatibility has **not** been established for every target.
+- Snapshot operations can copy an entire Map; consider the cost for very large states.
+- `Scope.dispose()` does not cancel unrelated async work already running elsewhere.
+- External bridge calls and I/O cannot be undone by transaction rollback.
+- CommonJS is the supported distribution format; pure ESM integration may require build-tool interop.
+
+---
 
 ## Documentation
 
-- [Architecture overview (English)](ARCHITECTURE.md)
-- [Detailed architecture notes (Russian)](docs/ARCHITECTURE.md)
-- [API guide (Russian)](docs/NEXUS_GUIDE_RU.md)
-- [Contribution guidelines](CONTRIBUTING.md)
-- [Release checklist](RELEASE_CHECKLIST.md)
-- [Security reporting](SECURITY.md)
+- [Architecture overview](ARCHITECTURE.md)
+- [Internal architecture details (Russian)](docs/ARCHITECTURE.md)
+- [Nexus guide (Russian)](docs/NEXUS_GUIDE_RU.md)
 - [Changelog](CHANGELOG.md)
+- [Release checklist](RELEASE_CHECKLIST.md)
+- [Security policy](SECURITY.md)
+- [Contribution guidelines](CONTRIBUTING.md)
+
+---
+
+## Contributing
+
+Contributions and bug reports are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md), run `npm run test:all`, and keep changes to the public API intentional and documented.
+
+---
 
 ## License
 
-[MIT License](LICENSE.md). Copyright (c) 2026 Nexus contributors.
+Released under the [MIT License](LICENSE.md). Copyright © 2026 Nexus contributors.
+
+---
+
+<p align="center">
+  Built with TypeScript · Designed for transactional state, events, and reactive workflows.
+</p>

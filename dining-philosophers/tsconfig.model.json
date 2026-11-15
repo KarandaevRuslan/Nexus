@@ -6,11 +6,17 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "lib": ["ES2022", "DOM"],
-    "rootDir": "..",
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "rootDir": ".",
     "outDir": "./.test-dist",
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["domain/**/*.ts", "nexus/**/*.ts"]
+  "include": [
+    "domain/**/*.ts",
+    "nexus/**/*.ts"
+  ]
 }

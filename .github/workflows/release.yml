@@ -32,6 +32,10 @@ jobs:
         run: npm run test:all
         env:
           NODE_OPTIONS: --unhandled-rejections=strict
+      - name: Install and build the Vite package consumer
+        run: |
+          npm --prefix dining-philosophers ci --ignore-scripts
+          npm run philosophers:build
       - name: Verify package file allowlist
         run: npm run check:release
       - name: Build release tarball

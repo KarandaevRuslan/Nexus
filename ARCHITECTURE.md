@@ -1,6 +1,6 @@
 # Architecture
 
-This document describes **Nexus v0.1.18** as implemented in this repository. For a more detailed, module-by-module account of its verified dependency boundaries, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) (Russian).
+This document describes **Nexus v0.1.19** as implemented in this repository. For a more detailed, module-by-module account of its verified dependency boundaries, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) (Russian).
 
 ## Execution model
 
